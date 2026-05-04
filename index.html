@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>rai</title>
+
+<style>
+body {
+    margin: 0;
+    background: radial-gradient(circle at center, #050505, #000);
+    color: white;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* CARD */
+.card {
+    width: 650px;
+    padding: 25px;
+    border-radius: 18px;
+    background: rgba(10,10,10,0.95);
+    border: 1px solid rgba(0,200,255,0.4);
+    box-shadow: 0 0 25px rgba(0,200,255,0.25);
+    backdrop-filter: blur(10px);
+}
+
+/* TOP */
+.top {
+    display: flex;
+    align-items: center;
+}
+
+.avatar {
+    width: 95px;
+    height: 95px;
+    border-radius: 50%;
+    margin-right: 20px;
+    object-fit: cover;
+    box-shadow: 0 0 15px rgba(0,200,255,0.5);
+}
+
+/* USERNAME */
+.username {
+    font-size: 36px;
+    font-weight: bold;
+    letter-spacing: 3px;
+    text-shadow: 0 0 10px rgba(255,255,255,0.8);
+}
+
+/* BADGE */
+.badge {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    background: rgba(20,20,20,0.9);
+    padding: 6px 12px;
+    border-radius: 10px;
+    width: fit-content;
+    box-shadow: 0 0 10px rgba(0,200,255,0.4);
+}
+
+.badge img {
+    width: 18px;
+    margin-right: 6px;
+}
+
+/* TEXT */
+.typing {
+    margin-top: 25px;
+    font-size: 15px;
+    color: #ccc;
+    height: 20px;
+    text-shadow: 0 0 5px rgba(255,255,255,0.3);
+}
+
+/* SOCIALS */
+.socials {
+    margin-top: 30px;
+    display: flex;
+    gap: 30px;
+}
+
+.socials a {
+    display: inline-block;
+}
+
+.socials img {
+    width: 34px;
+    filter: blur(0.3px) brightness(1.2);
+    transition: 0.25s;
+    opacity: 0.85;
+}
+
+.socials img:hover {
+    transform: scale(1.25);
+    filter: drop-shadow(0 0 10px #00c3ff);
+    opacity: 1;
+}
+
+/* VIEW COUNTER */
+.views {
+    margin-top: 20px;
+    font-size: 13px;
+    color: #aaa;
+    background: #111;
+    padding: 6px 12px;
+    border-radius: 20px;
+    width: fit-content;
+    box-shadow: 0 0 10px rgba(255,255,255,0.1);
+}
+
+/* FADE IN */
+.card {
+    animation: fadeIn 1s ease;
+}
+
+@keyframes fadeIn {
+    from {opacity:0; transform:translateY(20px);}
+    to {opacity:1; transform:translateY(0);}
+}
+</style>
+</head>
+
+<body>
+
+<audio autoplay loop>
+    <source src="assets/sound.mp4" type="audio/mp4">
+</audio>
+
+<div class="card">
+
+    <div class="top">
+        <img src="assets/profile.gif" class="avatar">
+
+        <div>
+            <div class="username" id="username"></div>
+
+            <div class="badge">
+                <img src="assets/staff.gif">
+                <span>Staff</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="typing" id="typing"></div>
+
+    <div class="socials">
+        <a href="YOUR_ROBLOX_LINK_HERE" target="_blank">
+            <img src="assets/roblox.png">
+        </a>
+
+        <a href="YOUR_DISCORD_LINK_HERE" target="_blank">
+            <img src="assets/discord.png">
+        </a>
+    </div>
+
+    <div class="views">👁 921,235</div>
+
+</div>
+
+<script>
+const usernameText = "rai";
+const promoText = "ONLY AT RAITRACKER.XYZ";
+
+let uIndex = 0;
+let tIndex = 0;
+let phase = 0;
+
+const usernameEl = document.getElementById("username");
+const typingEl = document.getElementById("typing");
+
+/* USERNAME LOOP */
+function typeUsername() {
+    if (uIndex < usernameText.length) {
+        usernameEl.innerHTML += usernameText.charAt(uIndex);
+        uIndex++;
+        setTimeout(typeUsername, 120);
+    } else {
+        setTimeout(() => {
+            usernameEl.innerHTML = "";
+            uIndex = 0;
+            typeUsername();
+        }, 1800);
+    }
+}
+
+/* PROMO LOOP */
+function typePromo() {
+    if (phase === 0) {
+        if (tIndex < promoText.length) {
+            typingEl.innerHTML += promoText.charAt(tIndex);
+            tIndex++;
+            setTimeout(typePromo, 50);
+        } else {
+            phase = 1;
+            setTimeout(typePromo, 2000);
+        }
+    } else {
+        typingEl.innerHTML = "";
+        tIndex = 0;
+        phase = 0;
+        setTimeout(typePromo, 500);
+    }
+}
+
+typeUsername();
+typePromo();
+</script>
+
+</body>
+</html>
